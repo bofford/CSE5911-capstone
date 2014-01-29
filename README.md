@@ -1,8 +1,8 @@
 CSE5911-capstone
 ================
 
-Kinect Patient Rehab Project
-Ohio State University - Computer Science & Engineering 2014
+<h3>Kinect Patient Rehab Project</h3>
+<h3>Ohio State University - Computer Science & Engineering 2014</h4>
 This is a project partnered with the OSU Medical Center to help use a Kinect for physical rehabilitation programs. 
 
 Hey guys, here is what you'll need to know to get started on github:
