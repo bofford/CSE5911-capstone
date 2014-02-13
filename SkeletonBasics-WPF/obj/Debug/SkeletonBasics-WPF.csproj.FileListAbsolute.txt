@@ -1,0 +1,12 @@
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\App.g.cs
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
+D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
