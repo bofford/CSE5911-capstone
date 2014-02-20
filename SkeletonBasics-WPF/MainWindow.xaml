@@ -66,6 +66,9 @@
             <StatusBarItem Padding="0 0 0 10">
                 <TextBlock Name="statusBarText" Margin="-1 0 0 0">Click 'Seated' to change skeletal pipeline type!</TextBlock>
             </StatusBarItem>
-        </StatusBar>       
+        </StatusBar>
+        <TextBox x:Name="x_coordinate" HorizontalAlignment="Left" Height="23" Margin="212,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="162" TextChanged="id_TextChanged"/>
+        <TextBox x:Name="y_coordinate" HorizontalAlignment="Left" Height="23" Margin="405,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="z_coordinate" HorizontalAlignment="Left" Height="23" Margin="561,39,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

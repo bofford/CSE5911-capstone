@@ -1,12 +1,36 @@
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\App.g.cs
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
-D:\Software\Tien\Documents\Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
+G:\Capstone Test\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
+G:\Capstone Test\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\App.g.cs
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
+G:\Capstone Test\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\App.g.cs
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
+C:\Users\Songoku\Desktop\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\App.g.cs
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
