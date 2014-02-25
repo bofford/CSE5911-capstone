@@ -10,9 +10,9 @@ CSE5911-capstone
 <ol>
 <li>Make a Github account if you haven't already.</li>
 <li>Download GitHub for Windows - https://help.github.com/articles/set-up-git</li>
-<li><ul><li>Fork this repo/project with the "fork" button in the top right corner. </li>
-   <li>more info: https://help.github.com/articles/fork-a-repo </li>
-	<li>Make sure you set my repository as the upstream origin: https://github.com/sbedell/CSE5911-capstone</li></ul>
+<li><ul>
+	<li>Make sure you set my repository as the upstream: https://github.com/sbedell/CSE5911-capstone</li>
+    </ul>
 <li>Read the Git and Github documentation.</li>
-<li>From here on out, you can either use the Github GUI or the Git Shell to interact with this code repository.</li>
+<li>From here on out, you should use the Git Shell to interact with this code repository.</li>
 </ol>
