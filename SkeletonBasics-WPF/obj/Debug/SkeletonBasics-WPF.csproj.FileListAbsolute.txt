@@ -26,7 +26,6 @@ F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
-F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\App.g.cs
@@ -34,3 +33,8 @@ F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_Mar
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe.manifest
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.application
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.manifest
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application
+F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
