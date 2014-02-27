@@ -48,14 +48,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SkeletonBasics-WPF.exe" size="90112">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SkeletonBasics-WPF.exe" size="90624">
       <assemblyIdentity name="SkeletonBasics-WPF" version="0.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>lxanYeGKsWqVL+muDFoCNEozE2g=</dsig:DigestValue>
+        <dsig:DigestValue>5b15ADH73YUZqJqg1VMo7hKzEd4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -201,39 +201,77 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// Select Joint 
         /// </summary>
         /// <param name="j">Joint object</param>
-        private Joint GetJoint(Skeleton s)
+        private Joint[] GetJoint(Skeleton s)
         {
-            Joint jt = new Joint();
-            int ComboBIndex = JointCombobox.SelectedIndex;
+            int c = 0;
 
-            switch (ComboBIndex)
+            Joint[] jt = new Joint[ListBoxJointSelect.SelectedItems.Count]; // With ListboxItem, I can get how many of them are selected and and set the length of the array.
+         
+            if (ListBoxJointSelect.SelectedItems.Count != 0)
             {
-                case 1:
-                    {
-                        jt = s.Joints[JointType.Head];
-                    }
-                    break;
-                case 2:
-                    {
-                        jt = s.Joints[JointType.HandRight];
-                    }
-                    break;
-                case 3:
-                    {
-                        jt = s.Joints[JointType.HandLeft];
-                    }
-                    break;
-                case 4:
-                    {
-                        jt = s.Joints[JointType.FootRight];
-                    }
-                    break;
-                case 5:
-                    {
-                        jt = s.Joints[JointType.FootLeft];
-                    }
-                    break;
+                if (Head.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.Head];
+                    c++;
+                }
+                if (Torso.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.Spine];
+                    c++;
+                }
+                if (LeftArm.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.HandLeft];
+                    c++;
+                }
+                if (RightArm.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.HandRight];
+                    c++;
+                }
+                if (LeftLeg.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.FootLeft];
+                    c++;
+                }
+                if (RightLeg.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.FootRight];
+                    c++;
+                }
             }
+
+
+
+
+            //switch (ComboBIndex)
+            //{
+            //    case 1:
+            //        {
+            //            jt = s.Joints[JointType.Head];
+            //        }
+            //        break;
+            //    case 2:
+            //        {
+            //            jt = s.Joints[JointType.HandRight];
+            //        }
+            //        break;
+            //    case 3:
+            //        {
+            //            jt = s.Joints[JointType.HandLeft];
+            //        }
+            //        break;
+            //    case 4:
+            //        {
+            //            jt = s.Joints[JointType.FootRight];
+            //        }
+            //        break;
+            //    case 5:
+            //        {
+            //            jt = s.Joints[JointType.FootLeft];
+            //        }
+            //        break;
+            //}
             return jt;
 
         }
@@ -242,24 +280,37 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// Write Position to on the screen and also to file
         /// </summary>
         /// <param name="j">Joint object</param>
-        private void WriteJointPosition(Joint j)
+        private void WriteJointPosition(Joint[] j)
         {
             TextWriter tsw = new StreamWriter(@"F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\SkeletonData.txt", true);
-            double x,y,z;
+            double x, y, z;
             tsw.WriteLine(j);
             
-            x = Math.Round(j.Position.X, 2);
-            tsw.WriteLine(x);
-            x_coordinate.Text = x.ToString();
-      
-            y = Math.Round(j.Position.Y, 2);
-            tsw.WriteLine(y);
-            y_coordinate.Text = y.ToString();
-           
-            z = Math.Round(j.Position.Z, 2);
-            tsw.WriteLine(z);
-            z_coordinate.Text = z.ToString();
-            
+            if (j.Length != 0)
+            {
+                //Get the coordinate of all selected joint and put it into the Vetor array.
+                Vector4[] _jointCoordinate = new Vector4[j.Length];
+                for(int i=0; i<j.Length;i++)
+                {
+                    _jointCoordinate[i].X = j[i].Position.X;
+                    _jointCoordinate[i].Y = j[i].Position.Y;
+                    _jointCoordinate[i].Z = j[i].Position.Z;
+                    _jointCoordinate[i].W = 0;
+                }
+
+                // Right now just leave it for the first item coordinate. In the furture, we can get the calculation of joints combination
+                x = Math.Round(j[0].Position.X, 2);
+                tsw.WriteLine(x);
+                x_coordinate.Text = j.Length.ToString();
+
+                y = Math.Round(j[0].Position.Y, 2);
+                tsw.WriteLine(y);
+                y_coordinate.Text = j.Length.ToString();
+
+                z = Math.Round(j[0].Position.Z, 2);
+                tsw.WriteLine(z);
+                z_coordinate.Text = j.Length.ToString();
+            }
             tsw.Close();
         }
 
@@ -325,9 +376,15 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         private void DrawBonesAndJoints(Skeleton skeleton, DrawingContext drawingContext)
         {
             //Torso
-            if (JointCombobox.SelectedItem == Torso)
-            {            
+            //if (JointCombobox.SelectedItem == Torso)
+            //{            
+            if (Head.IsSelected == true)
+            {
                 this.DrawBone(skeleton, drawingContext, JointType.Head, JointType.ShoulderCenter);
+            }
+
+            if (Torso.IsSelected == true)
+            {
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.ShoulderLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.ShoulderRight);
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.Spine);
@@ -337,33 +394,40 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             }
 
             // Left Arm
-            else if (JointCombobox.SelectedItem == LeftArm)
-            {                
+            //else if (JointCombobox.SelectedItem == LeftArm)
+            //{     
+            if (LeftArm.IsSelected == true)
+            {
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderLeft, JointType.ElbowLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.ElbowLeft, JointType.WristLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.WristLeft, JointType.HandLeft);
             }
 
             // Right Arm
-            else if (JointCombobox.SelectedItem == RightArm)
-            {              
+            // else if (JointCombobox.SelectedItem == RightArm)
+            // {     
+            if (RightArm.IsSelected == true)
+            {
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderRight, JointType.ElbowRight);
                 this.DrawBone(skeleton, drawingContext, JointType.ElbowRight, JointType.WristRight);
                 this.DrawBone(skeleton, drawingContext, JointType.WristRight, JointType.HandRight);
             }
-            
+
             //Left Leg
-            else if (JointCombobox.SelectedItem == LeftLeg)
-            {                 
+            //else if (JointCombobox.SelectedItem == LeftLeg)
+            //{ 
+            if (LeftLeg.IsSelected == true)
+            {
                 this.DrawBone(skeleton, drawingContext, JointType.HipLeft, JointType.KneeLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.KneeLeft, JointType.AnkleLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.AnkleLeft, JointType.FootLeft);
             }
 
             // Right Leg
-            else if (JointCombobox.SelectedItem == RightLeg)
+            // else if (JointCombobox.SelectedItem == RightLeg)
+            // {
+            if (RightLeg.IsSelected == true)
             {
-              
                 this.DrawBone(skeleton, drawingContext, JointType.HipRight, JointType.KneeRight);
                 this.DrawBone(skeleton, drawingContext, JointType.KneeRight, JointType.AnkleRight);
                 this.DrawBone(skeleton, drawingContext, JointType.AnkleRight, JointType.FootRight);
@@ -375,11 +439,11 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
                 if (joint.TrackingState == JointTrackingState.Tracked)
                 {
-                    drawBrush = this.trackedJointBrush;                    
+                    drawBrush = this.trackedJointBrush;
                 }
                 else if (joint.TrackingState == JointTrackingState.Inferred)
                 {
-                    drawBrush = this.inferredJointBrush;                    
+                    drawBrush = this.inferredJointBrush;
                 }
 
                 if (drawBrush != null)
@@ -469,7 +533,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
                 float closestDistance = 10000f; // Start with a far enough distance
                 int closestID = 0;
-                
+
                 foreach (Skeleton skeleton in skels)
                 {
                     if (skeleton.TrackingState != SkeletonTrackingState.NotTracked)
