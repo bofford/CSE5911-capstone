@@ -19,7 +19,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     /// </summary>
     public partial class MainWindow : Window
     {
-       
+
 
         /// <summary>
         /// Width of output drawing
@@ -86,7 +86,9 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// </summary>
         private DrawingImage imageSource;
 
-        private float xStartingFrame, yStartingFrame, zStartingFrame, xEndingFrame, yEndingFrame, zEndingFrame, frameCount = 0f, xDiff, yDiff, zDiff;
+        private Vector4 startingFrame, endingFrame;
+        private int frameCount = 0;
+        private float posDisplacement;
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -237,8 +239,9 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                         if (skel.TrackingState == SkeletonTrackingState.Tracked)
                         {
                             this.DrawBonesAndJoints(skel, dc);
-                            frameCount++;
+
                             VolumeControl(skel);
+
 
                         }
                         else if (skel.TrackingState == SkeletonTrackingState.PositionOnly)
@@ -412,6 +415,11 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             }
         }
 
+        #region Track Closest Skeleton only
+        /// <summary>
+        /// Track Closest Skeleton only
+        /// </summary>
+        /// <param name="j">Skeleton array object</param>
         private void TrackClosestSkeleton(Skeleton[] skels)
         {
             if (this.sensor != null && this.sensor.SkeletonStream != null)
@@ -442,48 +450,40 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 }
             }
         }
+        #endregion
 
+        #region Write Position to File
         /// <summary>
         /// Write Position to on the screen and also to file
         /// </summary>
-        /// <param name="j">Joint object</param>
+        /// <param name="j">Joint array object</param>
         private void WriteJointPosition(Joint[] j)
         {
             if (j.Length != 0)
             {
                 TextWriter tsw = new StreamWriter(@"E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
                 double x, y, z;
-                tsw.WriteLine(j[0].JointType);
 
-                if (j.Length != 0)
+                //Get the coordinate of all selected joint and put it into the Vetor array, use for later when calculate multiple joint movement
+                Vector4[] _jointCoordinate = new Vector4[j.Length];
+                for (int i = 0; i < j.Length; i++)
                 {
-                    //Get the coordinate of all selected joint and put it into the Vetor array.
-                    Vector4[] _jointCoordinate = new Vector4[j.Length];
-                    for (int i = 0; i < j.Length; i++)
-                    {
-                        _jointCoordinate[i].X = j[i].Position.X;
-                        _jointCoordinate[i].Y = j[i].Position.Y;
-                        _jointCoordinate[i].Z = j[i].Position.Z;
-                        _jointCoordinate[i].W = 0;
-                    }
+                    x = Math.Round(j[i].Position.X, 3);
+                    y = Math.Round(j[i].Position.Y, 3);
+                    z = Math.Round(j[i].Position.Z, 3);
 
-                    // Right now just leave it for the first item coordinate. In the furture, we can get the calculation of joints combination
-                    x = Math.Round(j[0].Position.X, 2);
-                    tsw.WriteLine(x);
-                    x_coordinate.Text = j.Length.ToString();
+                    _jointCoordinate[i].X = (float)x;
+                    _jointCoordinate[i].Y = (float)y;
+                    _jointCoordinate[i].Z = (float)z;
 
-                    y = Math.Round(j[0].Position.Y, 3);
-                    tsw.WriteLine(y);
-                    y_coordinate.Text = j.Length.ToString();
-
-                    z = Math.Round(j[0].Position.Z, 3);
-                    tsw.WriteLine(z);
-                    //z_coordinate.Text = j.Length.ToString();
+                    // Write to file which JointType and its x, y, z coordinate
+                    tsw.WriteLine(j[i].JointType);
+                    tsw.WriteLine("x = " + j[i].Position.X.ToString() + "   y = " + j[i].Position.Y.ToString() + "  z = " + j[i].Position.Z.ToString());
                 }
                 tsw.Close();
             }
         }
-
+        #endregion
 
         #region VolumeControl
         /// <summary>
@@ -492,47 +492,42 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// <param name="skel">Skeleton Object</param>
         private void VolumeControl(Skeleton skel)
         {
-            z_coordinate.Text = frameCount.ToString();
             WriteJointPosition(GetJointsCombination(skel));
-            //z_coordinate.Text = frameCount.ToString(); // Debug Frame COunt only
-            if (frameCount == 1.0f)
+            if (frameCount == 1)
             {
-                xStartingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.X);
-                yStartingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Y);
-                zStartingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Z);
+                startingFrame.X = (float)Math.Round(skel.Joints[JointType.HandRight].Position.X, 3);
+                startingFrame.Y = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Y, 3);
+                startingFrame.Z = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Z, 3);
+
             }
-            else if (frameCount == 5.0f)
+            if (frameCount >= 10)
             {
-                xEndingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.X);
-                yEndingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Y);
-                zEndingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Z);
+                endingFrame.X = (float)Math.Round(skel.Joints[JointType.HandRight].Position.X, 3);
+                endingFrame.Y = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Y, 3);
+                endingFrame.Z = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Z, 3);
 
-                xDiff = Math.Abs(xEndingFrame - xStartingFrame);
-                yDiff = Math.Abs(yEndingFrame - yStartingFrame);
-                zDiff = Math.Abs(zEndingFrame - zStartingFrame);
+                posDisplacement = (float)Math.Sqrt(Math.Pow(endingFrame.X - startingFrame.X, 2) + Math.Pow(endingFrame.Y - startingFrame.Y, 2) + Math.Pow(endingFrame.Z - startingFrame.Z, 2));
+                y_coordinate.Text = posDisplacement.ToString(); // Testing how the value changes
 
-                y_coordinate.Text = yDiff.ToString(); // Testing how the value changes
-               
-
-                if (xDiff > 0.1f && yDiff >0.1f && zDiff > 0.1f)
+                if (posDisplacement > 0.05f)
                 {
                     SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
-                    x_coordinate.Text = "Volume Up";
                 }
-                else
+                else if (posDisplacement <= 0.05f)
                 {
                     SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                    x_coordinate.Text = "Volume Down";
+                    //x_coordinate.Text = Math.Pow(endingFrame.X - startingFrame.X, 2).ToString();
                 }
-                frameCount = 0.0f;
-            }
+                frameCount %= 10;
 
+            }
+            frameCount++;
 
         }
 
         #endregion
 
-
+        #region Joint Selection
         /// <summary>
         /// Select Joints Combination 
         /// </summary>
@@ -576,41 +571,11 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     c++;
                 }
             }
-
-
-
-
-            //switch (ComboBIndex)
-            //{
-            //    case 1:
-            //        {
-            //            jt = s.Joints[JointType.Head];
-            //        }
-            //        break;
-            //    case 2:
-            //        {
-            //            jt = s.Joints[JointType.HandRight];
-            //        }
-            //        break;
-            //    case 3:
-            //        {
-            //            jt = s.Joints[JointType.HandLeft];
-            //        }
-            //        break;
-            //    case 4:
-            //        {
-            //            jt = s.Joints[JointType.FootRight];
-            //        }
-            //        break;
-            //    case 5:
-            //        {
-            //            jt = s.Joints[JointType.FootLeft];
-            //        }
-            //        break
-            //}
             return jt;
-
         }
+        #endregion
+
+
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
         private const int WM_APPCOMMAND = 0x319;
