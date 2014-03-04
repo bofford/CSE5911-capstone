@@ -68,7 +68,7 @@
         </StatusBar>
         <TextBox x:Name="x_coordinate" HorizontalAlignment="Left" Height="23" Margin="454,24,0,0" TextWrapping="Wrap" Text="x_coordinate" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="y_coordinate" HorizontalAlignment="Left" Height="23" Margin="552,24,0,0" TextWrapping="Wrap" Text="y_coordinate" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="z_coordinate" HorizontalAlignment="Left" Height="23" Margin="653,24,0,0" TextWrapping="Wrap" Text="z_coordinate" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.065,0.574"/>
+        <TextBox x:Name="z_coordinate" HorizontalAlignment="Left" Height="23" Margin="653,24,0,0" TextWrapping="Wrap" Text="z_coordinate" VerticalAlignment="Top" Width="80"/>
         <!--<ComboBox x:Name="JointCombobox" HorizontalAlignment="Left" Margin="77,25,0,0" VerticalAlignment="Top" Width="123" Text="Joint" SelectedIndex="0">
             <ListBoxItem x:Name="Joints" Content="Joint Selection"/>
             <ListBoxItem x:Name="Torso" Content="Torso"/>

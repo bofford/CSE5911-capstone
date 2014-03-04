@@ -38,3 +38,35 @@ F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.app
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.manifest
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application
 F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe.manifest
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.application
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\App.g.cs
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.manifest
+E:\Software\Tien\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe.manifest
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.application
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\App.g.cs
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.g.resources
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.manifest
+E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application

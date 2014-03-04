@@ -11,12 +11,16 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     using System.Windows.Media;
     using Microsoft.Kinect;
     using System;
+    using System.Runtime.InteropServices;
+    using System.Diagnostics;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+       
+
         /// <summary>
         /// Width of output drawing
         /// </summary>
@@ -81,6 +85,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// Drawing image that we will display
         /// </summary>
         private DrawingImage imageSource;
+
+        private float xStartingFrame, yStartingFrame, zStartingFrame, xEndingFrame, yEndingFrame, zEndingFrame, frameCount = 0f, xDiff, yDiff, zDiff;
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -198,123 +204,6 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         }
 
         /// <summary>
-        /// Select Joint 
-        /// </summary>
-        /// <param name="j">Joint object</param>
-        private Joint[] GetJoint(Skeleton s)
-        {
-            int c = 0;
-
-            Joint[] jt = new Joint[ListBoxJointSelect.SelectedItems.Count]; // With ListboxItem, I can get how many of them are selected and and set the length of the array.
-         
-            if (ListBoxJointSelect.SelectedItems.Count != 0)
-            {
-                if (Head.IsSelected == true)
-                {
-                    jt[c] = s.Joints[JointType.Head];
-                    c++;
-                }
-                if (Torso.IsSelected == true)
-                {
-                    jt[c] = s.Joints[JointType.Spine];
-                    c++;
-                }
-                if (LeftArm.IsSelected == true)
-                {
-                    jt[c] = s.Joints[JointType.HandLeft];
-                    c++;
-                }
-                if (RightArm.IsSelected == true)
-                {
-                    jt[c] = s.Joints[JointType.HandRight];
-                    c++;
-                }
-                if (LeftLeg.IsSelected == true)
-                {
-                    jt[c] = s.Joints[JointType.FootLeft];
-                    c++;
-                }
-                if (RightLeg.IsSelected == true)
-                {
-                    jt[c] = s.Joints[JointType.FootRight];
-                    c++;
-                }
-            }
-
-
-
-
-            //switch (ComboBIndex)
-            //{
-            //    case 1:
-            //        {
-            //            jt = s.Joints[JointType.Head];
-            //        }
-            //        break;
-            //    case 2:
-            //        {
-            //            jt = s.Joints[JointType.HandRight];
-            //        }
-            //        break;
-            //    case 3:
-            //        {
-            //            jt = s.Joints[JointType.HandLeft];
-            //        }
-            //        break;
-            //    case 4:
-            //        {
-            //            jt = s.Joints[JointType.FootRight];
-            //        }
-            //        break;
-            //    case 5:
-            //        {
-            //            jt = s.Joints[JointType.FootLeft];
-            //        }
-            //        break;
-            //}
-            return jt;
-
-        }
-
-        /// <summary>
-        /// Write Position to on the screen and also to file
-        /// </summary>
-        /// <param name="j">Joint object</param>
-        private void WriteJointPosition(Joint[] j)
-        {
-            TextWriter tsw = new StreamWriter(@"F:\Desktop Backup 02-18-2014\SkeletonBasics-WPF\SkeletonData.txt", true);
-            double x, y, z;
-            tsw.WriteLine(j);
-            
-            if (j.Length != 0)
-            {
-                //Get the coordinate of all selected joint and put it into the Vetor array.
-                Vector4[] _jointCoordinate = new Vector4[j.Length];
-                for(int i=0; i<j.Length;i++)
-                {
-                    _jointCoordinate[i].X = j[i].Position.X;
-                    _jointCoordinate[i].Y = j[i].Position.Y;
-                    _jointCoordinate[i].Z = j[i].Position.Z;
-                    _jointCoordinate[i].W = 0;
-                }
-
-                // Right now just leave it for the first item coordinate. In the furture, we can get the calculation of joints combination
-                x = Math.Round(j[0].Position.X, 2);
-                tsw.WriteLine(x);
-                x_coordinate.Text = j.Length.ToString();
-
-                y = Math.Round(j[0].Position.Y, 2);
-                tsw.WriteLine(y);
-                y_coordinate.Text = j.Length.ToString();
-
-                z = Math.Round(j[0].Position.Z, 2);
-                tsw.WriteLine(z);
-                z_coordinate.Text = j.Length.ToString();
-            }
-            tsw.Close();
-        }
-
-        /// <summary>
         /// Event handler for Kinect sensor's SkeletonFrameReady event
         /// </summary>
         /// <param name="sender">object sending the event</param>
@@ -348,8 +237,9 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                         if (skel.TrackingState == SkeletonTrackingState.Tracked)
                         {
                             this.DrawBonesAndJoints(skel, dc);
+                            frameCount++;
+                            VolumeControl(skel);
 
-                            WriteJointPosition(GetJoint(skel)); //  Method to write joint position to file(Tien)
                         }
                         else if (skel.TrackingState == SkeletonTrackingState.PositionOnly)
                         {
@@ -552,5 +442,179 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 }
             }
         }
+
+        /// <summary>
+        /// Write Position to on the screen and also to file
+        /// </summary>
+        /// <param name="j">Joint object</param>
+        private void WriteJointPosition(Joint[] j)
+        {
+            if (j.Length != 0)
+            {
+                TextWriter tsw = new StreamWriter(@"E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
+                double x, y, z;
+                tsw.WriteLine(j[0].JointType);
+
+                if (j.Length != 0)
+                {
+                    //Get the coordinate of all selected joint and put it into the Vetor array.
+                    Vector4[] _jointCoordinate = new Vector4[j.Length];
+                    for (int i = 0; i < j.Length; i++)
+                    {
+                        _jointCoordinate[i].X = j[i].Position.X;
+                        _jointCoordinate[i].Y = j[i].Position.Y;
+                        _jointCoordinate[i].Z = j[i].Position.Z;
+                        _jointCoordinate[i].W = 0;
+                    }
+
+                    // Right now just leave it for the first item coordinate. In the furture, we can get the calculation of joints combination
+                    x = Math.Round(j[0].Position.X, 2);
+                    tsw.WriteLine(x);
+                    x_coordinate.Text = j.Length.ToString();
+
+                    y = Math.Round(j[0].Position.Y, 3);
+                    tsw.WriteLine(y);
+                    y_coordinate.Text = j.Length.ToString();
+
+                    z = Math.Round(j[0].Position.Z, 3);
+                    tsw.WriteLine(z);
+                    //z_coordinate.Text = j.Length.ToString();
+                }
+                tsw.Close();
+            }
+        }
+
+
+        #region VolumeControl
+        /// <summary>
+        /// Control Master Volume
+        /// </summary>
+        /// <param name="skel">Skeleton Object</param>
+        private void VolumeControl(Skeleton skel)
+        {
+            z_coordinate.Text = frameCount.ToString();
+            WriteJointPosition(GetJointsCombination(skel));
+            //z_coordinate.Text = frameCount.ToString(); // Debug Frame COunt only
+            if (frameCount == 1.0f)
+            {
+                xStartingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.X);
+                yStartingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Y);
+                zStartingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Z);
+            }
+            else if (frameCount == 5.0f)
+            {
+                xEndingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.X);
+                yEndingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Y);
+                zEndingFrame = Math.Abs(skel.Joints[JointType.HandRight].Position.Z);
+
+                xDiff = Math.Abs(xEndingFrame - xStartingFrame);
+                yDiff = Math.Abs(yEndingFrame - yStartingFrame);
+                zDiff = Math.Abs(zEndingFrame - zStartingFrame);
+
+                y_coordinate.Text = yDiff.ToString(); // Testing how the value changes
+               
+
+                if (xDiff > 0.1f && yDiff >0.1f && zDiff > 0.1f)
+                {
+                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                    x_coordinate.Text = "Volume Up";
+                }
+                else
+                {
+                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                    x_coordinate.Text = "Volume Down";
+                }
+                frameCount = 0.0f;
+            }
+
+
+        }
+
+        #endregion
+
+
+        /// <summary>
+        /// Select Joints Combination 
+        /// </summary>
+        /// <param name="s">Skeleton Object</param>
+        private Joint[] GetJointsCombination(Skeleton s)
+        {
+            int c = 0;
+
+            Joint[] jt = new Joint[ListBoxJointSelect.SelectedItems.Count]; // With ListboxItem, I can get how many of them are selected and and set the length of the array.
+
+            if (ListBoxJointSelect.SelectedItems.Count != 0)
+            {
+                if (Head.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.Head];
+                    c++;
+                }
+                if (Torso.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.Spine];
+                    c++;
+                }
+                if (LeftArm.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.HandLeft];
+                    c++;
+                }
+                if (RightArm.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.HandRight];
+                    c++;
+                }
+                if (LeftLeg.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.FootLeft];
+                    c++;
+                }
+                if (RightLeg.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.FootRight];
+                    c++;
+                }
+            }
+
+
+
+
+            //switch (ComboBIndex)
+            //{
+            //    case 1:
+            //        {
+            //            jt = s.Joints[JointType.Head];
+            //        }
+            //        break;
+            //    case 2:
+            //        {
+            //            jt = s.Joints[JointType.HandRight];
+            //        }
+            //        break;
+            //    case 3:
+            //        {
+            //            jt = s.Joints[JointType.HandLeft];
+            //        }
+            //        break;
+            //    case 4:
+            //        {
+            //            jt = s.Joints[JointType.FootRight];
+            //        }
+            //        break;
+            //    case 5:
+            //        {
+            //            jt = s.Joints[JointType.FootLeft];
+            //        }
+            //        break
+            //}
+            return jt;
+
+        }
+        private const int APPCOMMAND_VOLUME_UP = 0xA0000;
+        private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
+        private const int WM_APPCOMMAND = 0x319;
+        [DllImport("user32.dll")]
+        public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
     }
 }
