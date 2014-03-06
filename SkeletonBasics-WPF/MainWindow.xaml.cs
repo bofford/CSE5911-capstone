@@ -1,4 +1,5 @@
-﻿//------------------------------------------------------------------------------
+﻿
+//------------------------------------------------------------------------------
 // <copyright file="MainWindow.xaml.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
@@ -461,7 +462,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         {
             if (j.Length != 0)
             {
-                TextWriter tsw = new StreamWriter(@"E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
+                TextWriter tsw = new StreamWriter(@"C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
                 double x, y, z;
 
                 //Get the coordinate of all selected joint and put it into the Vetor array, use for later when calculate multiple joint movement
@@ -493,34 +494,55 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         private void VolumeControl(Skeleton skel)
         {
             WriteJointPosition(GetJointsCombination(skel));
-            if (frameCount == 1)
+            Joint[] j = new Joint[ListBoxJointSelect.SelectedItems.Count];
+            j = GetJointsCombination(skel);
+            Debug.WriteLine(j.Length);
+            Vector4[] _jointCoordinate = new Vector4[j.Length];
+            float x, y, z;
+            for (int i = 0; i < j.Length; i++)
             {
-                startingFrame.X = (float)Math.Round(skel.Joints[JointType.HandRight].Position.X, 3);
-                startingFrame.Y = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Y, 3);
-                startingFrame.Z = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Z, 3);
+                x = (float)Math.Round(j[i].Position.X, 3);
+                y = (float)Math.Round(j[i].Position.Y, 3);
+                z = (float)Math.Round(j[i].Position.Z, 3);
 
+                _jointCoordinate[i].X = (float)x;
+                _jointCoordinate[i].Y = (float)y;
+                _jointCoordinate[i].Z = (float)z;
             }
-            if (frameCount >= 10)
-            {
-                endingFrame.X = (float)Math.Round(skel.Joints[JointType.HandRight].Position.X, 3);
-                endingFrame.Y = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Y, 3);
-                endingFrame.Z = (float)Math.Round(skel.Joints[JointType.HandRight].Position.Z, 3);
-
-                posDisplacement = (float)Math.Sqrt(Math.Pow(endingFrame.X - startingFrame.X, 2) + Math.Pow(endingFrame.Y - startingFrame.Y, 2) + Math.Pow(endingFrame.Z - startingFrame.Z, 2));
-                y_coordinate.Text = posDisplacement.ToString(); // Testing how the value changes
-
-                if (posDisplacement > 0.05f)
+            
+                float posDiff = 0f;
+               //Debug.WriteLine(joi.JointType);
+                Joint joi = j[0];
+                if (frameCount == 1)
                 {
-                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
-                }
-                else if (posDisplacement <= 0.05f)
-                {
-                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                    //x_coordinate.Text = Math.Pow(endingFrame.X - startingFrame.X, 2).ToString();
-                }
-                frameCount %= 10;
+                    startingFrame.X = (float)Math.Round(joi.Position.X, 3);
+                    startingFrame.Y = (float)Math.Round(joi.Position.Y, 3);
+                    startingFrame.Z = (float)Math.Round(joi.Position.Z, 3);
 
-            }
+                }
+                if (frameCount >= 10)
+                {
+                    endingFrame.X = (float)Math.Round(joi.Position.X, 3);
+                    endingFrame.Y = (float)Math.Round(joi.Position.Y, 3);
+                    endingFrame.Z = (float)Math.Round(joi.Position.Z, 3);
+
+                    posDiff = (float)Math.Sqrt(Math.Pow(endingFrame.X - startingFrame.X, 2) + Math.Pow(endingFrame.Y - startingFrame.Y, 2) + Math.Pow(endingFrame.Z - startingFrame.Z, 2));
+                    y_coordinate.Text = posDiff.ToString(); // Testing how the value changes
+
+                    if (posDiff > 0.05f)
+                    {
+                       
+                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                    }
+                    else if (posDiff <= 0.05f)
+                    {
+                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                        //x_coordinate.Text = Math.Pow(endingFrame.X - startingFrame.X, 2).ToString();
+                    }
+                    frameCount %= 10;
+
+                }
+            
             frameCount++;
 
         }
