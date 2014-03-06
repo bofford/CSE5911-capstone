@@ -87,9 +87,11 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// </summary>
         private DrawingImage imageSource;
 
-        private Vector4 startingFrame, endingFrame;
-        private int frameCount = 0;
-        private float posDisplacement;
+
+        private int frameCount = 0; // Use to get the frame
+        private Vector4[] startingFrame, endingFrame; // Use to store the coordinate of a specific Joint at the starting frame and ending frame
+        private float[] posDisplacement; // Use to store the displacement of a specific Joint between starting frame and ending frame
+        private int noOfJoints = 0; // Use to get the number of Joints change during User selection, useful to know when to intialize a new starting frame, ending frame and posdisplacement
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -462,24 +464,17 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         {
             if (j.Length != 0)
             {
-                TextWriter tsw = new StreamWriter(@"C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
+                TextWriter tsw = new StreamWriter(@"E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
                 double x, y, z;
-
-                //Get the coordinate of all selected joint and put it into the Vetor array, use for later when calculate multiple joint movement
-                Vector4[] _jointCoordinate = new Vector4[j.Length];
-                for (int i = 0; i < j.Length; i++)
+                foreach (Joint joi in j)
                 {
-                    x = Math.Round(j[i].Position.X, 3);
-                    y = Math.Round(j[i].Position.Y, 3);
-                    z = Math.Round(j[i].Position.Z, 3);
-
-                    _jointCoordinate[i].X = (float)x;
-                    _jointCoordinate[i].Y = (float)y;
-                    _jointCoordinate[i].Z = (float)z;
+                    x = Math.Round(joi.Position.X, 3);
+                    y = Math.Round(joi.Position.Y, 3);
+                    z = Math.Round(joi.Position.Z, 3);
 
                     // Write to file which JointType and its x, y, z coordinate
-                    tsw.WriteLine(j[i].JointType);
-                    tsw.WriteLine("x = " + j[i].Position.X.ToString() + "   y = " + j[i].Position.Y.ToString() + "  z = " + j[i].Position.Z.ToString());
+                    tsw.WriteLine(joi.JointType);
+                    tsw.WriteLine("x = " + joi.Position.X.ToString() + "\t\ty = " + joi.Position.Y.ToString() + "\t\t  z = " + joi.Position.Z.ToString());
                 }
                 tsw.Close();
             }
@@ -493,58 +488,75 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// <param name="skel">Skeleton Object</param>
         private void VolumeControl(Skeleton skel)
         {
-            WriteJointPosition(GetJointsCombination(skel));
-            Joint[] j = new Joint[ListBoxJointSelect.SelectedItems.Count];
-            j = GetJointsCombination(skel);
-            Debug.WriteLine(j.Length);
-            Vector4[] _jointCoordinate = new Vector4[j.Length];
-            float x, y, z;
-            for (int i = 0; i < j.Length; i++)
-            {
-                x = (float)Math.Round(j[i].Position.X, 3);
-                y = (float)Math.Round(j[i].Position.Y, 3);
-                z = (float)Math.Round(j[i].Position.Z, 3);
+            WriteJointPosition(GetJointsCombination(skel)); //Trigger data Collection
 
-                _jointCoordinate[i].X = (float)x;
-                _jointCoordinate[i].Y = (float)y;
-                _jointCoordinate[i].Z = (float)z;
+            Joint[] j = GetJointsCombination(skel);
+            Vector4[] jointCoordinate = new Vector4[j.Length];
+            //bool mute = true;
+
+            if (noOfJoints != j.Length) // Check to see if the Joint selection has changed then initialized variables
+            {
+
+                startingFrame = new Vector4[j.Length];
+                endingFrame = new Vector4[j.Length];
+                posDisplacement = new float[j.Length];
+                noOfJoints = j.Length;
             }
-            
-                float posDiff = 0f;
-               //Debug.WriteLine(joi.JointType);
-                Joint joi = j[0];
+
+            for (int i = 0; i < j.Length; i++)  // Get the Coordinate of each joint and put it in an array
+            {
+                //Debug.WriteLine("j.Length = " + j.Length);
+                //Debug.WriteLine("JointCoordinate.Length = " + jointCoordinate.Length);
+                jointCoordinate[i].X = (float)Math.Round(j[i].Position.X, 3);
+                jointCoordinate[i].Y = (float)Math.Round(j[i].Position.Y, 3);
+                jointCoordinate[i].Z = (float)Math.Round(j[i].Position.Z, 3);
+
+
+                // Check the position of each joint, if they are moving, increase the volume.
                 if (frameCount == 1)
                 {
-                    startingFrame.X = (float)Math.Round(joi.Position.X, 3);
-                    startingFrame.Y = (float)Math.Round(joi.Position.Y, 3);
-                    startingFrame.Z = (float)Math.Round(joi.Position.Z, 3);
-
+                    //Debug.WriteLine("At Frame 1");
+                    startingFrame[i].X = (float)Math.Round(jointCoordinate[i].X, 3);
+                    startingFrame[i].Y = (float)Math.Round(jointCoordinate[i].Y, 3);
+                    startingFrame[i].Z = (float)Math.Round(jointCoordinate[i].Z, 3);
                 }
-                if (frameCount >= 10)
+                if (frameCount == 10)
                 {
-                    endingFrame.X = (float)Math.Round(joi.Position.X, 3);
-                    endingFrame.Y = (float)Math.Round(joi.Position.Y, 3);
-                    endingFrame.Z = (float)Math.Round(joi.Position.Z, 3);
+                    //Debug.WriteLine("At Frame 10");
+                    Debug.WriteLine("At Frame 10. i = " + i);
+                    endingFrame[i].X = (float)Math.Round(jointCoordinate[i].X, 3);
+                    endingFrame[i].Y = (float)Math.Round(jointCoordinate[i].Y, 3);
+                    endingFrame[i].Z = (float)Math.Round(jointCoordinate[i].Z, 3);
 
-                    posDiff = (float)Math.Sqrt(Math.Pow(endingFrame.X - startingFrame.X, 2) + Math.Pow(endingFrame.Y - startingFrame.Y, 2) + Math.Pow(endingFrame.Z - startingFrame.Z, 2));
-                    y_coordinate.Text = posDiff.ToString(); // Testing how the value changes
+                    // Calculate the displacement of the Joint between the starting frame and ending frame
+                    posDisplacement[i] = (float)Math.Sqrt(Math.Pow(endingFrame[i].X - startingFrame[i].X, 2) + Math.Pow(endingFrame[i].Y - startingFrame[i].Y, 2) + Math.Pow(endingFrame[i].Z - startingFrame[i].Z, 2));
+                    y_coordinate.Text = posDisplacement[i].ToString(); // Testing how the value changes
 
-                    if (posDiff > 0.05f)
+                    //mute = mute && posDisplacement[i] <= 0.05f;
+                    if (posDisplacement[i] > 0.05f)
                     {
-                       
-                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                        for (int l = 0; l < j.Length; l++)
+                        {
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                        }
                     }
-                    else if (posDiff <= 0.05f)
+                    else if (posDisplacement[i] <= 0.05f)
                     {
                         SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                        //x_coordinate.Text = Math.Pow(endingFrame.X - startingFrame.X, 2).ToString();
                     }
-                    frameCount %= 10;
-
+                    //if (mute == true && i>0)
+                    //{
+                    //    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
+                    //}
                 }
-            
-            frameCount++;
 
+            }
+
+            frameCount++;
+            if (frameCount > 10)
+            {
+                frameCount %= 10;
+            }
         }
 
         #endregion
@@ -598,6 +610,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         #endregion
 
 
+        private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
         private const int WM_APPCOMMAND = 0x319;
