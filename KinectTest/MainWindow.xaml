@@ -1,0 +1,93 @@
+﻿<Window x:Class="Microsoft.Samples.Kinect.SkeletonBasics.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kinect Rehabilitation" Height="665.4" Width="770" Loaded="WindowLoaded" Closing="WindowClosing">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="MediumGreyBrush" Color="#ff6e6e6e"/>
+        <SolidColorBrush x:Key="KinectPurpleBrush" Color="#ff52318f"/>
+        <SolidColorBrush x:Key="KinectBlueBrush" Color="#ff00BCF2"/>
+        <Style TargetType="{x:Type Image}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+        <Style TargetType="{x:Type CheckBox}" x:Key="SquareCheckBox" >
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Background="Transparent">
+                                <Grid x:Name="SquareCheckBoxChecked">
+                                    <Image x:Name="CheckedNormal" Source="Images\CheckedNormal.png" Stretch="None" HorizontalAlignment="Center"/>
+                                    <Image x:Name="CheckedHover" Source="Images\CheckedHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                </Grid>
+                                <Grid x:Name="SquareCheckBoxUnchecked" Visibility="Collapsed">
+                                    <Image x:Name="UncheckedNormal" Source="Images\UncheckedNormal.png" Stretch="None" HorizontalAlignment="Center"/>
+                                    <Image x:Name="UncheckedHover" Source="Images\UncheckedHover.png" Stretch="None" HorizontalAlignment="Center" Visibility="Collapsed"/>
+                                </Grid>
+                                <TextBlock x:Name="SquareCheckBoxText" Text="{TemplateBinding Content}" TextAlignment="Left"  VerticalAlignment="Center" Foreground="{StaticResource KinectPurpleBrush}" FontSize="15"  Margin="9,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="SquareCheckBoxChecked"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="SquareCheckBoxUnchecked"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="CheckedNormal"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="UncheckedNormal"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="CheckedHover"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="UncheckedHover"/>
+                                <Setter Property="Foreground" Value="{StaticResource KinectBlueBrush}" TargetName="SquareCheckBoxText"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="layoutGrid" Margin="10 0 10 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Margin="0 0 0 20">
+            <Image DockPanel.Dock="Left" Source="Images\Logo.png" Stretch="Fill" Height="32" Width="81" Margin="0 10 0 5"/>
+            <Image Grid.Column="1" Source="Images\Status.png" Stretch="None"  Margin="0 0 0 5"/>
+        </DockPanel>
+        <Viewbox Grid.Row="1" Margin="52,29.8,37.2,10.4" Height="480" VerticalAlignment="Center" Width="640" HorizontalAlignment="Center">
+            <Image Name="Image" Width="640" Height="480" VerticalAlignment="Stretch"/>
+        </Viewbox>
+        <CheckBox Grid.Row="2" Style="{StaticResource SquareCheckBox}" Content="Seated Mode" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10 10 10" Name="checkBoxSeatedMode" Checked="CheckBoxSeatedModeChanged" Unchecked="CheckBoxSeatedModeChanged"/>
+        <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+            <StatusBarItem Padding="0 0 0 10">
+                <TextBlock Name="statusBarText" Margin="-1 0 0 0">Click 'Seated' to change skeletal pipeline type!</TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <TextBox x:Name="x_coordinate" HorizontalAlignment="Left" Height="23" Margin="454,24,0,0" TextWrapping="Wrap" Text="x_coordinate" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="y_coordinate" HorizontalAlignment="Left" Height="23" Margin="552,24,0,0" TextWrapping="Wrap" Text="y_coordinate" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="z_coordinate" HorizontalAlignment="Left" Height="23" Margin="653,24,0,0" TextWrapping="Wrap" Text="z_coordinate" VerticalAlignment="Top" Width="80"/>
+        <!--<ComboBox x:Name="JointCombobox" HorizontalAlignment="Left" Margin="77,25,0,0" VerticalAlignment="Top" Width="123" Text="Joint" SelectedIndex="0">
+            <ListBoxItem x:Name="Joints" Content="Joint Selection"/>
+            <ListBoxItem x:Name="Torso" Content="Torso"/>
+            <ListBoxItem x:Name="RightArm" Content="RightArm"/>
+            <ListBoxItem x:Name="LeftArm" Content="LeftArm"/>
+            <ListBoxItem x:Name="RightLeg" Content="RightLeg"/>
+            <ListBoxItem x:Name="LeftLeg" Content="LeftLeg"/>
+        </ComboBox>-->
+        <Label Content="z" HorizontalAlignment="Left" Margin="671,-2,0,0" VerticalAlignment="Top"/>
+        <Label Content="y" HorizontalAlignment="Left" Margin="572,-2,0,0" VerticalAlignment="Top"/>
+        <Label Content="x" HorizontalAlignment="Left" Margin="473,0,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="90" Margin="85,2,0,0" VerticalAlignment="Top" Width="199" Grid.RowSpan="2">
+            <ListBoxItem x:Name="Head" Content="Head" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="Torso" Content="Torso" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftArm" Content="LeftArm" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightArm" Content="RightArm" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftLeg" Content="LeftLeg" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightLeg" Content="RightLeg" Unselected="OnUnselected"/>
+        </ListBox>
+        <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+    </Grid>
+</Window>
