@@ -80,13 +80,14 @@
         <Label Content="z" HorizontalAlignment="Left" Margin="671,-2,0,0" VerticalAlignment="Top"/>
         <Label Content="y" HorizontalAlignment="Left" Margin="572,-2,0,0" VerticalAlignment="Top"/>
         <Label Content="x" HorizontalAlignment="Left" Margin="473,0,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="90" Margin="135,2,0,0" VerticalAlignment="Top" Width="199" Grid.RowSpan="2">
-            <ListBoxItem x:Name="Head" Content="Head"/>
-            <ListBoxItem x:Name="Torso" Content="Torso"/>
-            <ListBoxItem x:Name="LeftArm" Content="LeftArm"/>
-            <ListBoxItem x:Name="RightArm" Content="RightArm"/>
-            <ListBoxItem x:Name="LeftLeg" Content="LeftLeg"/>
-            <ListBoxItem x:Name="RightLeg" Content="RightLeg"/>
+        <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="90" Margin="85,2,0,0" VerticalAlignment="Top" Width="199" Grid.RowSpan="2">
+            <ListBoxItem x:Name="Head" Content="Head" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="Torso" Content="Torso" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftArm" Content="LeftArm" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightArm" Content="RightArm" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftLeg" Content="LeftLeg" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightLeg" Content="RightLeg" Unselected="OnUnselected"/>
         </ListBox>
+        <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
     </Grid>
 </Window>

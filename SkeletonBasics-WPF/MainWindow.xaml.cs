@@ -14,6 +14,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     using System;
     using System.Runtime.InteropServices;
     using System.Diagnostics;
+    using System.Windows.Controls;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -609,12 +610,47 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         }
         #endregion
 
-
+        
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
         private const int WM_APPCOMMAND = 0x319;
         [DllImport("user32.dll")]
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
+
+        #region Track All Joints Button
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < ListBoxJointSelect.Items.Count; i++)
+            {
+                //ListBoxJointSelect.Set
+                Head.IsSelected = true;
+                Torso.IsSelected = true;
+                RightArm.IsSelected = true;
+                LeftArm.IsSelected = true;
+                RightLeg.IsSelected = true;
+                LeftLeg.IsSelected = true;
+            }
+
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Head.IsSelected = false;
+            Torso.IsSelected = false;
+            RightArm.IsSelected = false;
+            LeftArm.IsSelected = false;
+            RightLeg.IsSelected = false;
+            LeftLeg.IsSelected = false;
+        }
+
+        private void OnUnselected(object sender, RoutedEventArgs e)
+        {
+            if (SelectAllCheckedBox.IsChecked == true)
+            {
+                SelectAllCheckedBox.IsChecked = false;
+            }
+        }
+        #endregion
     }
 }
