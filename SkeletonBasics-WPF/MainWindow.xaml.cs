@@ -465,7 +465,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         {
             if (j.Length != 0)
             {
-                TextWriter tsw = new StreamWriter(@"E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
+                TextWriter tsw = new StreamWriter(@"C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
                 double x, y, z;
                 foreach (Joint joi in j)
                 {
@@ -610,7 +610,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         }
         #endregion
 
-        
+
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;

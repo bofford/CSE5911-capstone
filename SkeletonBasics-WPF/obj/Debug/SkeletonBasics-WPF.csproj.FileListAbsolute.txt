@@ -113,3 +113,7 @@ C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\Sk
 C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.manifest
 C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application
 >>>>>>> 48732ffae35cb8b75f8afd8e58deee7be997814e
+C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe.manifest
+C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.application
+C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.manifest
+C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application
