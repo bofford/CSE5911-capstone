@@ -89,5 +89,6 @@
             <ListBoxItem x:Name="RightLeg" Content="RightLeg" Unselected="OnUnselected"/>
         </ListBox>
         <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <CheckBox x:Name="BalanceCheckedBox" Content="Balance mode" HorizontalAlignment="Left" Margin="284,20,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

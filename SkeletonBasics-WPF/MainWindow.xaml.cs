@@ -418,44 +418,44 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 }
             }
         }
-
-        #region Track Closest Skeleton only
-        /// <summary>
-        /// Track Closest Skeleton only
-        /// </summary>
-        /// <param name="j">Skeleton array object</param>
-        private void TrackClosestSkeleton(Skeleton[] skels)
-        {
-            if (this.sensor != null && this.sensor.SkeletonStream != null)
-            {
-                if (!this.sensor.SkeletonStream.AppChoosesSkeletons)
+        
+                #region Track Closest Skeleton only
+                /// <summary>
+                /// Track Closest Skeleton only
+                /// </summary>
+                /// <param name="j">Skeleton array object</param>
+                private void TrackClosestSkeleton(Skeleton[] skels)
                 {
-                    this.sensor.SkeletonStream.AppChoosesSkeletons = true; // Ensure AppChoosesSkeletons is set
-                }
-
-                float closestDistance = 10000f; // Start with a far enough distance
-                int closestID = 0;
-
-                foreach (Skeleton skeleton in skels)
-                {
-                    if (skeleton.TrackingState != SkeletonTrackingState.NotTracked)
+                    if (this.sensor != null && this.sensor.SkeletonStream != null)
                     {
-                        if (skeleton.Position.Z < closestDistance)
+                        if (!this.sensor.SkeletonStream.AppChoosesSkeletons)
                         {
-                            closestID = skeleton.TrackingId;
-                            closestDistance = skeleton.Position.Z;
+                            this.sensor.SkeletonStream.AppChoosesSkeletons = true; // Ensure AppChoosesSkeletons is set
+                        }
+
+                        float closestDistance = 10000f; // Start with a far enough distance
+                        int closestID = 0;
+
+                        foreach (Skeleton skeleton in skels)
+                        {
+                            if (skeleton.TrackingState != SkeletonTrackingState.NotTracked)
+                            {
+                                if (skeleton.Position.Z < closestDistance)
+                                {
+                                    closestID = skeleton.TrackingId;
+                                    closestDistance = skeleton.Position.Z;
+                                }
+                            }
+                        }
+
+                        if (closestID > 0)
+                        {
+                            this.sensor.SkeletonStream.ChooseSkeletons(closestID); // Track this skeleton
                         }
                     }
                 }
-
-                if (closestID > 0)
-                {
-                    this.sensor.SkeletonStream.ChooseSkeletons(closestID); // Track this skeleton
-                }
-            }
-        }
-        #endregion
-
+                #endregion
+        
         #region Write Position to File
         /// <summary>
         /// Write Position to on the screen and also to file
@@ -491,9 +491,10 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         {
             WriteJointPosition(GetJointsCombination(skel)); //Trigger data Collection
 
+
             Joint[] j = GetJointsCombination(skel);
             Vector4[] jointCoordinate = new Vector4[j.Length];
-            //bool mute = true;
+            bool allJointsNotMove = false;
 
             if (noOfJoints != j.Length) // Check to see if the Joint selection has changed then initialized variables
             {
@@ -534,30 +535,69 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     y_coordinate.Text = posDisplacement[i].ToString(); // Testing how the value changes
 
                     //mute = mute && posDisplacement[i] <= 0.05f;
-                    if (posDisplacement[i] > 0.05f)
+                    if (BalanceCheckedBox.IsChecked == false)
                     {
-                        for (int l = 0; l < j.Length; l++)
+
+                        if (posDisplacement[i] > 0.05f)
                         {
-                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                            allJointsNotMove = allJointsNotMove || true;
+                            //    //for (int l = 0; l < j.Length; l++)
+                            //    //{
+                            //        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                            //    //}
+
+                        }
+                        else if (posDisplacement[i] <= 0.05f)
+                        //{
+                        //    //SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                            allJointsNotMove = allJointsNotMove || false;
+                        //}
+
+
+
+                        //if (mute == true && i>0)
+                        //{
+                        //    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
+                        //}
+                    }
+                    else if (BalanceCheckedBox.IsChecked == true)
+                    {
+
+                        if (posDisplacement[i] < 0.05f)
+                        {
+                            for (int l = 0; l < j.Length; l++)
+                            {
+                                SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                            }
+                            // allJointNotMove = false;
+                        }
+                        else if (posDisplacement[i] > 0.05f)
+                        {
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
                         }
                     }
-                    else if (posDisplacement[i] <= 0.05f)
-                    {
-                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                    }
-                    //if (mute == true && i>0)
-                    //{
-                    //    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
-                    //}
                 }
 
             }
-
+            if (frameCount == 10 && j.Length != 0)
+            {
+                if (allJointsNotMove == false)
+                {
+                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                }
+                else if (allJointsNotMove == true)
+                {
+                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                }
+            }
             frameCount++;
             if (frameCount > 10)
             {
                 frameCount %= 10;
             }
+
         }
 
         #endregion
@@ -610,7 +650,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         }
         #endregion
 
-        
+
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
