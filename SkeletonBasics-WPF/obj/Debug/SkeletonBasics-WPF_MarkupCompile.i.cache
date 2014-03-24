@@ -4,12 +4,20 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\
+=======
+C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\
+>>>>>>> 289dd32d6513ba9606743948d3ecb5d3a57563f1
 Microsoft.Samples.Kinect.SkeletonBasics
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 E:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\App.xaml
+=======
+C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\App.xaml
+>>>>>>> 289dd32d6513ba9606743948d3ecb5d3a57563f1
 11151548125
 
 6201330092

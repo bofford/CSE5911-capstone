@@ -48,7 +48,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
         #line hidden
         
         
-        #line 61 "..\..\MainWindow.xaml"
+        #line 67 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Image Image;
         
@@ -56,7 +56,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
         #line hidden
         
         
-        #line 63 "..\..\MainWindow.xaml"
+        #line 69 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.CheckBox checkBoxSeatedMode;
         
@@ -64,7 +64,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
         #line hidden
         
         
-        #line 64 "..\..\MainWindow.xaml"
+        #line 70 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Primitives.StatusBar statusBar;
         
@@ -72,33 +72,9 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
         #line hidden
         
         
-        #line 66 "..\..\MainWindow.xaml"
+        #line 72 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.TextBlock statusBarText;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 69 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox x_coordinate;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 70 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox y_coordinate;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 71 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox z_coordinate;
         
         #line default
         #line hidden
@@ -220,13 +196,13 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             case 4:
             this.checkBoxSeatedMode = ((System.Windows.Controls.CheckBox)(target));
             
-            #line 63 "..\..\MainWindow.xaml"
+            #line 69 "..\..\MainWindow.xaml"
             this.checkBoxSeatedMode.Checked += new System.Windows.RoutedEventHandler(this.CheckBoxSeatedModeChanged);
             
             #line default
             #line hidden
             
-            #line 63 "..\..\MainWindow.xaml"
+            #line 69 "..\..\MainWindow.xaml"
             this.checkBoxSeatedMode.Unchecked += new System.Windows.RoutedEventHandler(this.CheckBoxSeatedModeChanged);
             
             #line default
@@ -239,18 +215,9 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             this.statusBarText = ((System.Windows.Controls.TextBlock)(target));
             return;
             case 7:
-            this.x_coordinate = ((System.Windows.Controls.TextBox)(target));
-            return;
-            case 8:
-            this.y_coordinate = ((System.Windows.Controls.TextBox)(target));
-            return;
-            case 9:
-            this.z_coordinate = ((System.Windows.Controls.TextBox)(target));
-            return;
-            case 10:
             this.ListBoxJointSelect = ((System.Windows.Controls.ListBox)(target));
             return;
-            case 11:
+            case 8:
             this.Head = ((System.Windows.Controls.ListBoxItem)(target));
             
             #line 84 "..\..\MainWindow.xaml"
@@ -259,7 +226,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             #line default
             #line hidden
             return;
-            case 12:
+            case 9:
             this.Torso = ((System.Windows.Controls.ListBoxItem)(target));
             
             #line 85 "..\..\MainWindow.xaml"
@@ -268,7 +235,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             #line default
             #line hidden
             return;
-            case 13:
+            case 10:
             this.LeftArm = ((System.Windows.Controls.ListBoxItem)(target));
             
             #line 86 "..\..\MainWindow.xaml"
@@ -277,7 +244,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             #line default
             #line hidden
             return;
-            case 14:
+            case 11:
             this.RightArm = ((System.Windows.Controls.ListBoxItem)(target));
             
             #line 87 "..\..\MainWindow.xaml"
@@ -286,7 +253,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             #line default
             #line hidden
             return;
-            case 15:
+            case 12:
             this.LeftLeg = ((System.Windows.Controls.ListBoxItem)(target));
             
             #line 88 "..\..\MainWindow.xaml"
@@ -295,7 +262,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             #line default
             #line hidden
             return;
-            case 16:
+            case 13:
             this.RightLeg = ((System.Windows.Controls.ListBoxItem)(target));
             
             #line 89 "..\..\MainWindow.xaml"
@@ -304,7 +271,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             #line default
             #line hidden
             return;
-            case 17:
+            case 14:
             this.SelectAllCheckedBox = ((System.Windows.Controls.CheckBox)(target));
             
             #line 91 "..\..\MainWindow.xaml"
@@ -315,6 +282,14 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics {
             
             #line 91 "..\..\MainWindow.xaml"
             this.SelectAllCheckedBox.Unchecked += new System.Windows.RoutedEventHandler(this.CheckBox_Unchecked);
+            
+            #line default
+            #line hidden
+            return;
+            case 15:
+            
+            #line 93 "..\..\MainWindow.xaml"
+            ((System.Windows.Controls.Slider)(target)).ValueChanged += new System.Windows.RoutedPropertyChangedEventHandler<double>(this.Slider_ValueChanged_1);
             
             #line default
             #line hidden
