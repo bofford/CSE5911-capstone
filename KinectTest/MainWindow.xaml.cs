@@ -22,7 +22,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     public partial class MainWindow : Window
     {
 
-
+        double volume;
+        double thresvol;
         /// <summary>
         /// Width of output drawing
         /// </summary>
@@ -531,10 +532,10 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
                     // Calculate the displacement of the Joint between the starting frame and ending frame
                     posDisplacement[i] = (float)Math.Sqrt(Math.Pow(endingFrame[i].X - startingFrame[i].X, 2) + Math.Pow(endingFrame[i].Y - startingFrame[i].Y, 2) + Math.Pow(endingFrame[i].Z - startingFrame[i].Z, 2));
-                    y_coordinate.Text = posDisplacement[i].ToString(); // Testing how the value changes
+                    //y_coordinate.Text = posDisplacement[i].ToString(); // Testing how the value changes
 
                     //mute = mute && posDisplacement[i] <= 0.05f;
-                    if (posDisplacement[i] > 0.05f)
+                    if (posDisplacement[i] > 0.05f && volume < thresvol)
                     {
                         for (int l = 0; l < j.Length; l++)
                         {
@@ -652,5 +653,13 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             }
         }
         #endregion
+
+        private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = sender as Slider;
+            this.thresvol = slider.Value;
+            this.volume++;
+        }
+
     }
 }
