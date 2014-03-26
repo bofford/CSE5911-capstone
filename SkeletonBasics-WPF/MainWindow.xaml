@@ -53,10 +53,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Margin="0 0 0 20">
-            <Image DockPanel.Dock="Left" Source="Images\Logo.png" Stretch="Fill" Height="32" Width="81" Margin="0 10 0 5"/>
-            <Image Grid.Column="1" Source="Images\Status.png" Stretch="None"  Margin="0 0 0 5"/>
-        </DockPanel>
         <Viewbox Grid.Row="1" Margin="52,29.8,37.2,10.4" Height="480" VerticalAlignment="Center" Width="640" HorizontalAlignment="Center">
             <Image Name="Image" Width="640" Height="480" VerticalAlignment="Stretch"/>
         </Viewbox>
@@ -66,9 +62,6 @@
                 <TextBlock Name="statusBarText" Margin="-1 0 0 0">Click 'Seated' to change skeletal pipeline type!</TextBlock>
             </StatusBarItem>
         </StatusBar>
-        <TextBox x:Name="x_coordinate" HorizontalAlignment="Left" Height="23" Margin="454,24,0,0" TextWrapping="Wrap" Text="x_coordinate" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="y_coordinate" HorizontalAlignment="Left" Height="23" Margin="552,24,0,0" TextWrapping="Wrap" Text="y_coordinate" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="z_coordinate" HorizontalAlignment="Left" Height="23" Margin="653,24,0,0" TextWrapping="Wrap" Text="z_coordinate" VerticalAlignment="Top" Width="80"/>
         <!--<ComboBox x:Name="JointCombobox" HorizontalAlignment="Left" Margin="77,25,0,0" VerticalAlignment="Top" Width="123" Text="Joint" SelectedIndex="0">
             <ListBoxItem x:Name="Joints" Content="Joint Selection"/>
             <ListBoxItem x:Name="Torso" Content="Torso"/>
@@ -77,10 +70,7 @@
             <ListBoxItem x:Name="RightLeg" Content="RightLeg"/>
             <ListBoxItem x:Name="LeftLeg" Content="LeftLeg"/>
         </ComboBox>-->
-        <Label Content="z" HorizontalAlignment="Left" Margin="671,-2,0,0" VerticalAlignment="Top"/>
-        <Label Content="y" HorizontalAlignment="Left" Margin="572,-2,0,0" VerticalAlignment="Top"/>
-        <Label Content="x" HorizontalAlignment="Left" Margin="473,0,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="90" Margin="85,2,0,0" VerticalAlignment="Top" Width="199" Grid.RowSpan="2">
+        <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="90" Margin="15,0,0,0" VerticalAlignment="Top" Width="199" Grid.RowSpan="2">
             <ListBoxItem x:Name="Head" Content="Head" Unselected="OnUnselected"/>
             <ListBoxItem x:Name="Torso" Content="Torso" Unselected="OnUnselected"/>
             <ListBoxItem x:Name="LeftArm" Content="LeftArm" Unselected="OnUnselected"/>
@@ -88,6 +78,8 @@
             <ListBoxItem x:Name="LeftLeg" Content="LeftLeg" Unselected="OnUnselected"/>
             <ListBoxItem x:Name="RightLeg" Content="RightLeg" Unselected="OnUnselected"/>
         </ListBox>
-        <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="219,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <Label x:Name="Max_Volume" HorizontalAlignment="Left" Height="29" Margin="219,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="85" ScrollViewer.HorizontalScrollBarVisibility="Visible" Content="Max Volume"/>
+        <Slider HorizontalAlignment="Left" Height="31" Margin="309,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.544,0.71" Maximum="100" ValueChanged="Slider_ValueChanged_2"/>
     </Grid>
 </Window>

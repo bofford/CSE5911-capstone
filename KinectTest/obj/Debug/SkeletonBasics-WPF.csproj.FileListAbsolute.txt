@@ -113,3 +113,19 @@ C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\Sk
 C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.manifest
 C:\Users\Blake\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application
 >>>>>>> 48732ffae35cb8b75f8afd8e58deee7be997814e
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF.exe
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF.pdb
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\bin\Debug\SkeletonBasics-WPF.exe.manifest
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\bin\Debug\SkeletonBasics-WPF.application
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\bin\Debug\SkeletonBasics-WPF.exe
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\bin\Debug\SkeletonBasics-WPF.pdb
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\MainWindow.baml
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\MainWindow.g.cs
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\App.g.cs
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF_MarkupCompile.cache
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF.g.resources
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\Microsoft.Samples.Kinect.SkeletonBasics.Properties.Resources.resources
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF.csproj.GenerateResource.Cache
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF.exe.manifest
+C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\SkeletonBasics-WPF.application
