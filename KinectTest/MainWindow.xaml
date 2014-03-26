@@ -47,28 +47,31 @@
     </Window.Resources>
 
     <Grid Name="layoutGrid" Margin="10 0 10 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="720*"/>
+            <ColumnDefinition Width="23*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="25.839"/>
+            <RowDefinition Height="9.361"/>
+            <RowDefinition Height="31.809"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Row="0" Margin="0 0 0 20">
+        <DockPanel Grid.Row="0" Margin="0,0,402,20.2" Grid.RowSpan="3">
             <Image DockPanel.Dock="Left" Source="Images\Logo.png" Stretch="Fill" Height="32" Width="81" Margin="0 10 0 5"/>
-            <Image Grid.Column="1" Source="Images\Status.png" Stretch="None"  Margin="0 0 0 5"/>
+            <Image Grid.Column="1" Source="Images\Status.png" Stretch="None"  Margin="0,0,0,5.2" Width="149"/>
         </DockPanel>
-        <Viewbox Grid.Row="1" Margin="52,29.8,37.2,10.4" Height="480" VerticalAlignment="Center" Width="640" HorizontalAlignment="Center">
+        <Viewbox Grid.Row="3" Margin="59,31.8,21,13" Height="480" VerticalAlignment="Center" Width="640" HorizontalAlignment="Center">
             <Image Name="Image" Width="640" Height="480" VerticalAlignment="Stretch"/>
         </Viewbox>
-        <CheckBox Grid.Row="2" Style="{StaticResource SquareCheckBox}" Content="Seated Mode" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0 10 10 10" Name="checkBoxSeatedMode" Checked="CheckBoxSeatedModeChanged" Unchecked="CheckBoxSeatedModeChanged"/>
-        <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+        <CheckBox Grid.Row="4" Style="{StaticResource SquareCheckBox}" Content="Seated Mode" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,10" Name="checkBoxSeatedMode" Checked="CheckBoxSeatedModeChanged" Unchecked="CheckBoxSeatedModeChanged"/>
+        <StatusBar Grid.Row="4" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Bottom" Background="White" Foreground="{StaticResource MediumGreyBrush}" Grid.ColumnSpan="2" Margin="0,0,0.2,0">
             <StatusBarItem Padding="0 0 0 10">
                 <TextBlock Name="statusBarText" Margin="-1 0 0 0">Click 'Seated' to change skeletal pipeline type!</TextBlock>
             </StatusBarItem>
         </StatusBar>
-        <TextBox x:Name="x_coordinate" HorizontalAlignment="Left" Height="23" Margin="454,24,0,0" TextWrapping="Wrap" Text="x_coordinate" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="y_coordinate" HorizontalAlignment="Left" Height="23" Margin="552,24,0,0" TextWrapping="Wrap" Text="y_coordinate" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="z_coordinate" HorizontalAlignment="Left" Height="23" Margin="653,24,0,0" TextWrapping="Wrap" Text="z_coordinate" VerticalAlignment="Top" Width="80"/>
         <!--<ComboBox x:Name="JointCombobox" HorizontalAlignment="Left" Margin="77,25,0,0" VerticalAlignment="Top" Width="123" Text="Joint" SelectedIndex="0">
             <ListBoxItem x:Name="Joints" Content="Joint Selection"/>
             <ListBoxItem x:Name="Torso" Content="Torso"/>
@@ -77,10 +80,7 @@
             <ListBoxItem x:Name="RightLeg" Content="RightLeg"/>
             <ListBoxItem x:Name="LeftLeg" Content="LeftLeg"/>
         </ComboBox>-->
-        <Label Content="z" HorizontalAlignment="Left" Margin="671,-2,0,0" VerticalAlignment="Top"/>
-        <Label Content="y" HorizontalAlignment="Left" Margin="572,-2,0,0" VerticalAlignment="Top"/>
-        <Label Content="x" HorizontalAlignment="Left" Margin="473,0,0,0" VerticalAlignment="Top"/>
-        <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="90" Margin="85,2,0,0" VerticalAlignment="Top" Width="199" Grid.RowSpan="2">
+        <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="90" Margin="85,2,0,0" VerticalAlignment="Top" Width="199" Grid.RowSpan="4">
             <ListBoxItem x:Name="Head" Content="Head" Unselected="OnUnselected"/>
             <ListBoxItem x:Name="Torso" Content="Torso" Unselected="OnUnselected"/>
             <ListBoxItem x:Name="LeftArm" Content="LeftArm" Unselected="OnUnselected"/>
@@ -89,5 +89,7 @@
             <ListBoxItem x:Name="RightLeg" Content="RightLeg" Unselected="OnUnselected"/>
         </ListBox>
         <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <Label Content="Threshold Volume" HorizontalAlignment="Left" Height="27" Margin="289,20,0,0" VerticalAlignment="Top" Width="110" Grid.RowSpan="3"/>
+        <Slider HorizontalAlignment="Left" Height="27" Margin="404,20,0,0" VerticalAlignment="Top" Width="141" ValueChanged="Slider_ValueChanged_1" Grid.RowSpan="3"/>
     </Grid>
 </Window>

@@ -78,8 +78,13 @@
             <ListBoxItem x:Name="LeftLeg" Content="LeftLeg" Unselected="OnUnselected"/>
             <ListBoxItem x:Name="RightLeg" Content="RightLeg" Unselected="OnUnselected"/>
         </ListBox>
+<<<<<<< HEAD
         <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="219,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
         <Label x:Name="Max_Volume" HorizontalAlignment="Left" Height="29" Margin="219,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="85" ScrollViewer.HorizontalScrollBarVisibility="Visible" Content="Max Volume"/>
         <Slider HorizontalAlignment="Left" Height="31" Margin="309,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.544,0.71" Maximum="100" ValueChanged="Slider_ValueChanged_2"/>
+=======
+        <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+        <CheckBox x:Name="BalanceCheckedBox" Content="Balance mode" HorizontalAlignment="Left" Margin="284,20,0,0" VerticalAlignment="Top"/>
+>>>>>>> 6e67d440644eab193baa288371ff9eb109bc7531
     </Grid>
 </Window>
