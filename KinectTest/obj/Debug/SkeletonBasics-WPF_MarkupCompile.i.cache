@@ -4,20 +4,12 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\
-=======
-C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\KinectTest\obj\Debug\
->>>>>>> 6e67d440644eab193baa288371ff9eb109bc7531
 Microsoft.Samples.Kinect.SkeletonBasics
 none
 false
 DEBUG;TRACE
-<<<<<<< HEAD
 C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\KinectTest\App.xaml
-=======
-C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\KinectTest\App.xaml
->>>>>>> 6e67d440644eab193baa288371ff9eb109bc7531
 11151548125
 
 61837378793
