@@ -8,22 +8,14 @@
     <framework targetVersion="4.0" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="SkeletonBasics-WPF.exe.manifest" size="3860">
+    <dependentAssembly dependencyType="install" codebase="SkeletonBasics-WPF.exe.manifest" size="3861">
       <assemblyIdentity name="SkeletonBasics-WPF.exe" version="1.0.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-<<<<<<< HEAD
-        <dsig:DigestValue>tSx2QuSle0v6siAfQ/MKzFmS6wo=</dsig:DigestValue>
-=======
-<<<<<<< HEAD
-        <dsig:DigestValue>QwIus7Q4aQF8UksJC9lrT1ErkUk=</dsig:DigestValue>
-=======
-        <dsig:DigestValue>rrLqZnfnu+zJv0ld2mDiMNCHUoA=</dsig:DigestValue>
->>>>>>> 289dd32d6513ba9606743948d3ecb5d3a57563f1
->>>>>>> 6e67d440644eab193baa288371ff9eb109bc7531
+        <dsig:DigestValue>R1bG2K/8OjqIIfDDCrcIlB/JC6A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

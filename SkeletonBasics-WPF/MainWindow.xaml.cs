@@ -466,11 +466,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         {
             if (j.Length != 0)
             {
-<<<<<<< HEAD
-                TextWriter tsw = new StreamWriter(@"C:\Users\Vineeta\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
-=======
-                TextWriter tsw = new StreamWriter(@"C:\Users\vigne_000\Documents\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
->>>>>>> 6e67d440644eab193baa288371ff9eb109bc7531
+                TextWriter tsw = new StreamWriter(@"D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\SkeletonData.txt", true);
+
                 double x, y, z;
                 foreach (Joint joi in j)
                 {
@@ -494,12 +491,12 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// <param name="skel">Skeleton Object</param>
         private void VolumeControl(Skeleton skel)
         {
-            WriteJointPosition(GetJointsCombination(skel)); //Trigger data Collection
+            //WriteJointPosition(GetJointsCombination(skel)); //Trigger data Collection
 
 
             Joint[] j = GetJointsCombination(skel);
             Vector4[] jointCoordinate = new Vector4[j.Length];
-            bool allJointsNotMove = false;
+            bool jointMove = false; // Joint Move bool to check if at least one joint is moving, if yes, jointMove = true and false if no joint is moving
 
             if (noOfJoints != j.Length) // Check to see if the Joint selection has changed then initialized variables
             {
@@ -512,93 +509,67 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
             for (int i = 0; i < j.Length; i++)  // Get the Coordinate of each joint and put it in an array
             {
-                //Debug.WriteLine("j.Length = " + j.Length);
-                //Debug.WriteLine("JointCoordinate.Length = " + jointCoordinate.Length);
                 jointCoordinate[i].X = (float)Math.Round(j[i].Position.X, 3);
                 jointCoordinate[i].Y = (float)Math.Round(j[i].Position.Y, 3);
                 jointCoordinate[i].Z = (float)Math.Round(j[i].Position.Z, 3);
 
-
                 // Check the position of each joint, if they are moving, increase the volume.
                 if (frameCount == 1)
                 {
-                    //Debug.WriteLine("At Frame 1");
                     startingFrame[i].X = (float)Math.Round(jointCoordinate[i].X, 3);
                     startingFrame[i].Y = (float)Math.Round(jointCoordinate[i].Y, 3);
                     startingFrame[i].Z = (float)Math.Round(jointCoordinate[i].Z, 3);
                 }
                 if (frameCount == 10)
                 {
-                    //Debug.WriteLine("At Frame 10");
-                    Debug.WriteLine("At Frame 10. i = " + i);
                     endingFrame[i].X = (float)Math.Round(jointCoordinate[i].X, 3);
                     endingFrame[i].Y = (float)Math.Round(jointCoordinate[i].Y, 3);
                     endingFrame[i].Z = (float)Math.Round(jointCoordinate[i].Z, 3);
 
                     // Calculate the displacement of the Joint between the starting frame and ending frame
                     posDisplacement[i] = (float)Math.Sqrt(Math.Pow(endingFrame[i].X - startingFrame[i].X, 2) + Math.Pow(endingFrame[i].Y - startingFrame[i].Y, 2) + Math.Pow(endingFrame[i].Z - startingFrame[i].Z, 2));
-                    //y_coordinate.Text = posDisplacement[i].ToString(); // Testing how the value changes
+                    // y_coordinate.Text = posDisplacement[i].ToString(); // Testing how the value changes
 
-                    //mute = mute && posDisplacement[i] <= 0.05f;
-<<<<<<< HEAD
-                    if (posDisplacement[i] > 0.05f )
-=======
-                    if (BalanceCheckedBox.IsChecked == false)
->>>>>>> 6e67d440644eab193baa288371ff9eb109bc7531
+                    //if (BalanceCheckedBox.IsChecked == false)
+                    //{
+                    if (posDisplacement[i] > 0.05f)
                     {
-
-                        if (posDisplacement[i] > 0.05f)
-                        {
-                            allJointsNotMove = allJointsNotMove || true;
-                            //    //for (int l = 0; l < j.Length; l++)
-                            //    //{
-                            //        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
-                            //    //}
-
-                        }
-                        else if (posDisplacement[i] <= 0.05f)
-                        //{
-                        //    //SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                            allJointsNotMove = allJointsNotMove || false;
-                        //}
-
-
-
-                        //if (mute == true && i>0)
-                        //{
-                        //    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_MUTE);
-                        //}
+                        jointMove = jointMove || true;
                     }
-                    else if (BalanceCheckedBox.IsChecked == true)
+                    else if (posDisplacement[i] <= 0.05f)
                     {
-
-                        if (posDisplacement[i] < 0.05f)
-                        {
-                            for (int l = 0; l < j.Length; l++)
-                            {
-                                SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
-                            }
-                            // allJointNotMove = false;
-                        }
-                        else if (posDisplacement[i] > 0.05f)
-                        {
-                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-
-                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                        }
+                        jointMove = jointMove || false;
                     }
+                    //}
                 }
 
             }
             if (frameCount == 10 && j.Length != 0)
             {
-                if (allJointsNotMove == false)
+                if (BalanceCheckedBox.IsChecked == false)
                 {
-                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                    if (jointMove == false)
+                    {
+                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                    }
+                    else if (jointMove == true)
+                    {
+                        //for (int i = 0; i < this.responseRate; i++)
+                        //{
+                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                        //}
+                    }
                 }
-                else if (allJointsNotMove == true)
+                else if (BalanceCheckedBox.IsChecked == true)
                 {
-                    SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                    if (jointMove == false)
+                    {
+                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                    }
+                    else if (jointMove == true)
+                    {
+                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                    }
                 }
             }
             frameCount++;
