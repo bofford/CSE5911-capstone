@@ -21,9 +21,6 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     /// </summary>
     public partial class MainWindow : Window
     {
-
-        double initvol = 0;
-        double thresholdval;
         /// <summary>
         /// Width of output drawing
         /// </summary>
@@ -94,6 +91,9 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         private Vector4[] startingFrame, endingFrame; // Use to store the coordinate of a specific Joint at the starting frame and ending frame
         private float[] posDisplacement; // Use to store the displacement of a specific Joint between starting frame and ending frame
         private int noOfJoints = 0; // Use to get the number of Joints change during User selection, useful to know when to intialize a new starting frame, ending frame and posdisplacement
+        private int volumeResponseLoop;
+        double volume = 0.0;
+        double thresholdval = 0.0;
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -548,27 +548,40 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             {
                 if (BalanceCheckedBox.IsChecked == false)
                 {
-                    if (jointMove == false)
+                    if (jointMove == false && volume > 0)
                     {
-                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                        for (int i = 0; i < volumeResponseLoop; i++)
+                        {
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                            volume = volume - 2;
+                        }
                     }
-                    else if (jointMove == true)
+                    else if (jointMove == true && volume < thresholdval)
                     {
-                        //for (int i = 0; i < this.responseRate; i++)
-                        //{
+                        for (int i = 0; i < volumeResponseLoop; i++)
+                        {
                         SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
-                        //}
+                        volume = volume + 2;
+                        }
                     }
                 }
                 else if (BalanceCheckedBox.IsChecked == true)
                 {
-                    if (jointMove == false)
+                    if (jointMove == false && volume < thresholdval)
                     {
-                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                        for (int i = 0; i < volumeResponseLoop; i++)
+                        {
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
+                            volume = volume + 2;
+                        }
                     }
-                    else if (jointMove == true)
+                    else if (jointMove == true && volume > 0)
                     {
-                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                        for (int i = 0; i < volumeResponseLoop; i++)
+                        {
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
+                            volume = volume - 2;
+                        }
                     }
                 }
             }
@@ -673,16 +686,17 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         }
         #endregion
 
-        private void Slider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-           var slider = sender as Slider;
-	       this.thresholdval = slider.Value;
-           
-        }
-
         private void Slider_ValueChanged_2(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
+            this.thresholdval = Math.Round(slider1.Value);
+            Debug.WriteLine("thresholdval value = " + thresholdval);
+        }
 
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var slider = sender as Slider;
+            this.volumeResponseLoop = (int)slider.Value;
+            Debug.WriteLine("slider value = " + slider.Value);
         }
 
     }
