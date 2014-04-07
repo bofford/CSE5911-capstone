@@ -420,42 +420,42 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             }
         }
         
-                #region Track Closest Skeleton only
-                /// <summary>
-                /// Track Closest Skeleton only
-                /// </summary>
-                /// <param name="j">Skeleton array object</param>
-                private void TrackClosestSkeleton(Skeleton[] skels)
-                {
-                    if (this.sensor != null && this.sensor.SkeletonStream != null)
-                    {
-                        if (!this.sensor.SkeletonStream.AppChoosesSkeletons)
-                        {
-                            this.sensor.SkeletonStream.AppChoosesSkeletons = true; // Ensure AppChoosesSkeletons is set
-                        }
+		#region Track Closest Skeleton only
+		/// <summary>
+		/// Track Closest Skeleton only
+		/// </summary>
+		/// <param name="j">Skeleton array object</param>
+		private void TrackClosestSkeleton(Skeleton[] skels)
+		{
+			if (this.sensor != null && this.sensor.SkeletonStream != null)
+			{
+				if (!this.sensor.SkeletonStream.AppChoosesSkeletons)
+				{
+					this.sensor.SkeletonStream.AppChoosesSkeletons = true; // Ensure AppChoosesSkeletons is set
+				}
 
-                        float closestDistance = 10000f; // Start with a far enough distance
-                        int closestID = 0;
+				float closestDistance = 10000f; // Start with a far enough distance
+				int closestID = 0;
 
-                        foreach (Skeleton skeleton in skels)
-                        {
-                            if (skeleton.TrackingState != SkeletonTrackingState.NotTracked)
-                            {
-                                if (skeleton.Position.Z < closestDistance)
-                                {
-                                    closestID = skeleton.TrackingId;
-                                    closestDistance = skeleton.Position.Z;
-                                }
-                            }
-                        }
+				foreach (Skeleton skeleton in skels)
+				{
+					if (skeleton.TrackingState != SkeletonTrackingState.NotTracked)
+					{
+						if (skeleton.Position.Z < closestDistance)
+						{
+							closestID = skeleton.TrackingId;
+							closestDistance = skeleton.Position.Z;
+						}
+					}
+				}
 
-                        if (closestID > 0)
-                        {
-                            this.sensor.SkeletonStream.ChooseSkeletons(closestID); // Track this skeleton
-                        }
-                    }
-                }
-                #endregion
+				if (closestID > 0)
+				{
+					this.sensor.SkeletonStream.ChooseSkeletons(closestID); // Track this skeleton
+				}
+			}
+		}
+		#endregion
         
         #region Write Position to File
         /// <summary>
