@@ -2,7 +2,6 @@ D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe.m
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.application
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.exe
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\bin\Debug\SkeletonBasics-WPF.pdb
-D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\MainWindow.baml
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\MainWindow.g.cs
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\App.g.cs
@@ -14,3 +13,4 @@ D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe.m
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.application
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.exe
 D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.pdb
+D:\GitHub\CSE5911-capstone\SkeletonBasics-WPF\obj\Debug\SkeletonBasics-WPF.csprojResolveAssemblyReference.cache

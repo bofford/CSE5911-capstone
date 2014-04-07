@@ -86,14 +86,14 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// </summary>
         private DrawingImage imageSource;
 
+        #region Variables use to implement Volume control
 
         private int frameCount = 0; // Use to get the frame
         private Vector4[] startingFrame, endingFrame; // Use to store the coordinate of a specific Joint at the starting frame and ending frame
         private float[] posDisplacement; // Use to store the displacement of a specific Joint between starting frame and ending frame
         private int noOfJoints = 0; // Use to get the number of Joints change during User selection, useful to know when to intialize a new starting frame, ending frame and posdisplacement
-        private int volumeResponseLoop;
-        double volume = 0.0;
-        double thresholdval = 0.0;
+        private int volumeResponseLoop; // Use to loop the volume response rate
+        #endregion
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -281,7 +281,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 this.DrawBone(skeleton, drawingContext, JointType.Head, JointType.ShoulderCenter);
             }
 
-            if (Torso.IsSelected == true)
+            if (CenterShoulder.IsSelected == true || CenterHip.IsSelected == true)
             {
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.ShoulderLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderCenter, JointType.ShoulderRight);
@@ -294,7 +294,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             // Left Arm
             //else if (JointCombobox.SelectedItem == LeftArm)
             //{     
-            if (LeftArm.IsSelected == true)
+            if (LeftHand.IsSelected == true || LeftWrist.IsSelected == true || LeftElbow.IsSelected == true)
             {
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderLeft, JointType.ElbowLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.ElbowLeft, JointType.WristLeft);
@@ -304,7 +304,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             // Right Arm
             // else if (JointCombobox.SelectedItem == RightArm)
             // {     
-            if (RightArm.IsSelected == true)
+            if (RightHand.IsSelected == true || RightWrist.IsSelected == true || RightElbow.IsSelected == true)
             {
                 this.DrawBone(skeleton, drawingContext, JointType.ShoulderRight, JointType.ElbowRight);
                 this.DrawBone(skeleton, drawingContext, JointType.ElbowRight, JointType.WristRight);
@@ -314,7 +314,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             //Left Leg
             //else if (JointCombobox.SelectedItem == LeftLeg)
             //{ 
-            if (LeftLeg.IsSelected == true)
+            if (LeftFoot.IsSelected == true || LeftAnkle.IsSelected == true || LeftKnee.IsSelected == true)
             {
                 this.DrawBone(skeleton, drawingContext, JointType.HipLeft, JointType.KneeLeft);
                 this.DrawBone(skeleton, drawingContext, JointType.KneeLeft, JointType.AnkleLeft);
@@ -324,7 +324,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             // Right Leg
             // else if (JointCombobox.SelectedItem == RightLeg)
             // {
-            if (RightLeg.IsSelected == true)
+            if (RightFoot.IsSelected == true || RightAnkle.IsSelected == true || RightKnee.IsSelected == true)
             {
                 this.DrawBone(skeleton, drawingContext, JointType.HipRight, JointType.KneeRight);
                 this.DrawBone(skeleton, drawingContext, JointType.KneeRight, JointType.AnkleRight);
@@ -462,6 +462,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// Write Position to on the screen and also to file
         /// </summary>
         /// <param name="j">Joint array object</param>
+        /// 
+        //Use to save the joint position data into file. Call this method inside volume control to use.
         private void WriteJointPosition(Joint[] j)
         {
             if (j.Length != 0)
@@ -528,10 +530,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
                     // Calculate the displacement of the Joint between the starting frame and ending frame
                     posDisplacement[i] = (float)Math.Sqrt(Math.Pow(endingFrame[i].X - startingFrame[i].X, 2) + Math.Pow(endingFrame[i].Y - startingFrame[i].Y, 2) + Math.Pow(endingFrame[i].Z - startingFrame[i].Z, 2));
-                    // y_coordinate.Text = posDisplacement[i].ToString(); // Testing how the value changes
-
-                    //if (BalanceCheckedBox.IsChecked == false)
-                    //{
+                    
+                    // Determine if one of the joints in the selected joints is moving or not.
                     if (posDisplacement[i] > 0.05f)
                     {
                         jointMove = jointMove || true;
@@ -540,47 +540,46 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     {
                         jointMove = jointMove || false;
                     }
-                    //}
                 }
 
             }
+
+            // if one of the joint is moving, then increasing volume, decreasing volume otherwise. It is opposite when the balance mode is enabled.
             if (frameCount == 10 && j.Length != 0)
             {
                 if (BalanceCheckedBox.IsChecked == false)
                 {
-                    if (jointMove == false && volume > 0)
+                    if (jointMove == false)
                     {
                         for (int i = 0; i < volumeResponseLoop; i++)
                         {
                             SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                            volume = volume - 2;
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
                         }
                     }
-                    else if (jointMove == true && volume < thresholdval)
+                    else if (jointMove == true)
                     {
                         for (int i = 0; i < volumeResponseLoop; i++)
                         {
-                        SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
-                        volume = volume + 2;
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
                         }
                     }
                 }
                 else if (BalanceCheckedBox.IsChecked == true)
                 {
-                    if (jointMove == false && volume < thresholdval)
+                    if (jointMove == false)
                     {
                         for (int i = 0; i < volumeResponseLoop; i++)
                         {
                             SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_UP);
-                            volume = volume + 2;
                         }
                     }
-                    else if (jointMove == true && volume > 0)
+                    else if (jointMove == true)
                     {
                         for (int i = 0; i < volumeResponseLoop; i++)
                         {
                             SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
-                            volume = volume - 2;
+                            SendMessageW(Process.GetCurrentProcess().MainWindowHandle, WM_APPCOMMAND, Process.GetCurrentProcess().MainWindowHandle, (IntPtr)APPCOMMAND_VOLUME_DOWN);
                         }
                     }
                 }
@@ -613,29 +612,74 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     jt[c] = s.Joints[JointType.Head];
                     c++;
                 }
-                if (Torso.IsSelected == true)
+                if (CenterShoulder.IsSelected == true)
                 {
-                    jt[c] = s.Joints[JointType.Spine];
+                    jt[c] = s.Joints[JointType.ShoulderCenter];
                     c++;
                 }
-                if (LeftArm.IsSelected == true)
+                if (CenterHip.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.HipCenter];
+                    c++;
+                }
+                if (LeftHand.IsSelected == true)
                 {
                     jt[c] = s.Joints[JointType.HandLeft];
                     c++;
                 }
-                if (RightArm.IsSelected == true)
+                if (RightHand.IsSelected == true)
                 {
                     jt[c] = s.Joints[JointType.HandRight];
                     c++;
                 }
-                if (LeftLeg.IsSelected == true)
+                if (LeftWrist.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.WristLeft];
+                    c++;
+                }
+                if (RightWrist.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.WristRight];
+                    c++;
+                }
+                if (LeftElbow.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.ElbowLeft];
+                    c++;
+                }
+                if (RightElbow.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.ElbowRight];
+                    c++;
+                }
+                if (LeftFoot.IsSelected == true)
                 {
                     jt[c] = s.Joints[JointType.FootLeft];
                     c++;
                 }
-                if (RightLeg.IsSelected == true)
+                if (RightFoot.IsSelected == true)
                 {
                     jt[c] = s.Joints[JointType.FootRight];
+                    c++;
+                }
+                if (LeftAnkle.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.AnkleLeft];
+                    c++;
+                }
+                if (RightAnkle.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.AnkleRight];
+                    c++;
+                }
+                if (LeftKnee.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.KneeLeft];
+                    c++;
+                }
+                if (RightKnee.IsSelected == true)
+                {
+                    jt[c] = s.Joints[JointType.KneeRight];
                     c++;
                 }
             }
@@ -643,7 +687,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         }
         #endregion
 
-
+        // These are for the volume control
         private const int APPCOMMAND_VOLUME_MUTE = 0x80000;
         private const int APPCOMMAND_VOLUME_UP = 0xA0000;
         private const int APPCOMMAND_VOLUME_DOWN = 0x90000;
@@ -652,29 +696,54 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         public static extern IntPtr SendMessageW(IntPtr hWnd, int Msg, IntPtr wParam, IntPtr lParam);
 
         #region Track All Joints Button
+        /// <summary>
+        /// Select all joints button
+        /// </summary>
+        /// <param name="s">event</param>
+         
+
+        // Select all the joints when the button is checked
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             for (int i = 0; i < ListBoxJointSelect.Items.Count; i++)
             {
-                //ListBoxJointSelect.Set
                 Head.IsSelected = true;
-                Torso.IsSelected = true;
-                RightArm.IsSelected = true;
-                LeftArm.IsSelected = true;
-                RightLeg.IsSelected = true;
-                LeftLeg.IsSelected = true;
+                CenterShoulder.IsSelected = true;
+                CenterHip.IsSelected = true;
+                RightHand.IsSelected = true;
+                LeftHand.IsSelected = true;
+                RightWrist.IsSelected = true;
+                LeftWrist.IsSelected = true;
+                RightElbow.IsSelected = true;
+                LeftElbow.IsSelected = true;
+                RightFoot.IsSelected = true;
+                LeftFoot.IsSelected = true;
+                RightAnkle.IsSelected = true;
+                LeftAnkle.IsSelected = true; 
+                RightKnee.IsSelected = true;
+                LeftKnee.IsSelected = true;
             }
 
         }
 
+        // Deselect all the joints when the button is unchecked
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             Head.IsSelected = false;
-            Torso.IsSelected = false;
-            RightArm.IsSelected = false;
-            LeftArm.IsSelected = false;
-            RightLeg.IsSelected = false;
-            LeftLeg.IsSelected = false;
+            CenterShoulder.IsSelected = false;
+            CenterHip.IsSelected = false;
+            RightHand.IsSelected = false;
+            LeftHand.IsSelected = false;
+            RightWrist.IsSelected = false;
+            LeftWrist.IsSelected = false;
+            RightElbow.IsSelected = false;
+            LeftElbow.IsSelected = false;
+            RightFoot.IsSelected = false;
+            LeftFoot.IsSelected = false;
+            RightAnkle.IsSelected = false;
+            LeftAnkle.IsSelected = false;
+            RightKnee.IsSelected = false;
+            LeftKnee.IsSelected = false;
         }
 
         private void OnUnselected(object sender, RoutedEventArgs e)
@@ -686,17 +755,12 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         }
         #endregion
 
-        private void Slider_ValueChanged_2(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            this.thresholdval = Math.Round(slider1.Value);
-            Debug.WriteLine("thresholdval value = " + thresholdval);
-        }
 
+        // Response rate slider
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var slider = sender as Slider;
             this.volumeResponseLoop = (int)slider.Value;
-            Debug.WriteLine("slider value = " + slider.Value);
         }
 
     }

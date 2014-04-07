@@ -72,20 +72,27 @@
         </ComboBox>-->
         <ListBox x:Name="ListBoxJointSelect" SelectionMode="Multiple" HorizontalAlignment="Left" Height="106" Margin="138,0,0,0" VerticalAlignment="Top" Width="127" Grid.RowSpan="2">
             <ListBoxItem x:Name="Head" Content="Head" Unselected="OnUnselected"/>
-            <ListBoxItem x:Name="Torso" Content="Torso" Unselected="OnUnselected"/>
-            <ListBoxItem x:Name="LeftArm" Content="LeftArm" Unselected="OnUnselected"/>
-            <ListBoxItem x:Name="RightArm" Content="RightArm" Unselected="OnUnselected"/>
-            <ListBoxItem x:Name="LeftLeg" Content="LeftLeg" Unselected="OnUnselected"/>
-            <ListBoxItem x:Name="RightLeg" Content="RightLeg" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="CenterShoulder" Content="CenterShoulder" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="CenterHip" Content="CenterHip" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftHand" Content="LeftHand" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightHand" Content="RightHand" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftWrist" Content="LeftWrist" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightWrist" Content="RightWrist" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftElbow" Content="LeftElbow" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightElbow" Content="RightElbow" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftFoot" Content="LeftFoot" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightFoot" Content="RightFoot" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftAnkle" Content="LeftAnkle" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightAnkle" Content="RightAnkle" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="LeftKnee" Content="LeftKnee" Unselected="OnUnselected"/>
+            <ListBoxItem x:Name="RightKnee" Content="RightKnee" Unselected="OnUnselected"/>
         </ListBox>
         <CheckBox x:Name="SelectAllCheckedBox" Content="Track All Joints" HorizontalAlignment="Left" Margin="284,0,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
-        <Label x:Name="Max_Volume" HorizontalAlignment="Left" Height="29" Margin="280,4.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="85" ScrollViewer.HorizontalScrollBarVisibility="Visible" Content="Max Volume"/>
-        <Slider x:Name="slider1" HorizontalAlignment="Left" Height="31" Margin="370,9.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.544,0.71" Maximum="100" ValueChanged="Slider_ValueChanged_2" LargeChange="2" SmallChange="2"/>
         <CheckBox x:Name="BalanceCheckedBox" Content="Balance mode" HorizontalAlignment="Left" Margin="284,20,0,0" VerticalAlignment="Top"/>
         <Image HorizontalAlignment="Center" Height="148" Margin="455,-42,0.2,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="288" Source="Images/osumc_logo.jpg" Stretch="Fill"/>
         <Image HorizontalAlignment="Left" Height="56" Margin="10,10,0,0" VerticalAlignment="Top" Width="123" Source="Images/Logo.png" Grid.RowSpan="2"/>
         <Slider HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Slider HorizontalAlignment="Left" Margin="370,40.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" ValueChanged="Slider_ValueChanged" Maximum="3" SmallChange="1" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" IsMoveToPointEnabled="True" Minimum="1"/>
-        <Label Content="Volume Rate" HorizontalAlignment="Left" Margin="280,38.8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+        <Slider HorizontalAlignment="Left" Margin="370,12.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80" ValueChanged="Slider_ValueChanged" Maximum="7" SmallChange="1" IsSnapToTickEnabled="True" IsSelectionRangeEnabled="True" IsMoveToPointEnabled="True" Minimum="3" Value="4"/>
+        <Label Content="Volume Rate" HorizontalAlignment="Left" Margin="284,9.8,0,0" Grid.Row="1" VerticalAlignment="Top"/>
     </Grid>
 </Window>
